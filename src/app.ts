@@ -14,15 +14,7 @@ app.use(express.urlencoded({extended:true}))
 
 
 
- 
-app.use((req, res, next) => {
-   const log  = `\nMethod -> ${req.method} - URL -> ${req.url} - TIME-> ${Date.now()} \n`
- fs.appendFile("logger.txt",log,(err)=>{})
 
-  next();
-});
-
- 
 
 app.use("/api/auth",userRouter)
 app.use("/api/auth/login",authRouter)

@@ -23,7 +23,44 @@ const createServiceIssueSingle = async(id:number)=>{
 
 }
 
+
+
+const createServicePatch = async(id:number,userID:number,role:string,payload:any,)=>{
+    const {title,description,type} = payload
+//id patate hbe 
+       const issueSearch = await pool.query(`
+            SELECT *FROM issues WHERE id=$1
+        
+        
+        
+        `,[id])
+        if(issueSearch.rows.length === 0){
+            throw new Error("Issue not Found")
+        }
+        if(role === "contributor" && userID !==issueSearch.rows[0].reporter_id){
+            throw new Error("unathorized Access!")
+        }
+        if(role === "contributor" && issueSearch.rows[0].status!="open"){
+            throw new Error("On going!")
+        }
+
+        const result = await pool.query(`UPDATE issues
+         SET
+         title = COALESCE($1, title),
+         description = COALESCE($2, description),
+         type = COALESCE($3, type),
+         status = 'in_progress',
+         updated_at = NOW()
+         WHERE id = $4
+         RETURNING *
+            
+            `,[title,description,type,id])
+            return result
+
+}
+
 export  const serviceIssues ={
     createServiceIssue,
-    createServiceIssueSingle
+    createServiceIssueSingle,
+    createServicePatch
 }

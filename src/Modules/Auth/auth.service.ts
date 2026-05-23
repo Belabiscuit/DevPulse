@@ -20,9 +20,9 @@ const loginServices = async(payload:Iuser)=>{
      }
 
           const jwtPayload = {
-            id :user.id,
-    name :user.name,
-    role:user.role
+            id :Number(user.id),
+             name :user.name,
+              role:user.role
 
 }
 const accessToken = jwt.sign(jwtPayload,config.secret as string ,{expiresIn:"1d"})

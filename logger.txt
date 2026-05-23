@@ -78,3 +78,9 @@ Method -> GET - URL -> /api/issues/3 - TIME-> 1779540653807
 Method -> GET - URL -> /api/issues/3 - TIME-> 1779540717368 
 
 Method -> GET - URL -> /api/issues/3 - TIME-> 1779540829712 
+
+Method -> PATCH - URL -> /api/auth/3 - TIME-> 1779550537182 
+
+Method -> PATCH - URL -> /api/issues/3 - TIME-> 1779550600465 
+
+Method -> PATCH - URL -> /api/issues/2 - TIME-> 1779550618989 

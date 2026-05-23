@@ -56,8 +56,33 @@ const createIssues = async (req:Request ,res:Response) =>{
         }
 
     } 
+
+
+
+    const patchIssueController = async(req:Request,res:Response)=>{
+        try {
+            const {id} =req.params
+            const{role,id:userID}=(req as any).user
+            const result = await serviceIssues.createServicePatch(Number(id),req.body,role,userID)
+            res.status(200).json({
+            success: true,
+            message: "Issue updated successfully",
+            data: result.rows[0]
+        })
+        } catch (error:any) {
+             return res.status(400).json({
+            success: false,
+            message: error.message,
+            
+        })
+        }
+
+    }
+
+
 export const issuesController={
     createIssues,
-    createIssueControllersSingle
+    createIssueControllersSingle,
+    patchIssueController
 
 }
