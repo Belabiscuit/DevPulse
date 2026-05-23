@@ -79,10 +79,30 @@ const createIssues = async (req:Request ,res:Response) =>{
 
     }
 
+    const deleteIssueController = async (req: Request, res: Response) => {
+    const { id } = req.params
+
+    try {
+        await serviceIssues.createServiceDelete(Number(id))
+        res.status(200).json({
+            success: true,
+            message: "Issue deleted successfully"
+        })
+    } catch (error: any) {
+        res.status(400).json({
+            success: false,
+            message: error.message,
+            error: {}
+        })
+    }
+}
+
+
 
 export const issuesController={
     createIssues,
     createIssueControllersSingle,
-    patchIssueController
+    patchIssueController,
+    deleteIssueController
 
 }

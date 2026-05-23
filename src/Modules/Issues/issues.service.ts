@@ -34,10 +34,11 @@ const createServicePatch = async(id:number,userID:number,role:string,payload:any
         
         
         `,[id])
+      
         if(issueSearch.rows.length === 0){
             throw new Error("Issue not Found")
         }
-        if(role === "contributor" && userID !==issueSearch.rows[0].reporter_id){
+        if(role === "contributor" && userID !== issueSearch.rows[0].reporter_id){
             throw new Error("unathorized Access!")
         }
         if(role === "contributor" && issueSearch.rows[0].status!="open"){
@@ -59,8 +60,21 @@ const createServicePatch = async(id:number,userID:number,role:string,payload:any
 
 }
 
+const createServiceDelete = async (id: number) => {
+    const issueSearch = await pool.query(
+        `SELECT * FROM issues WHERE id=$1`, [id]
+    )
+    if (issueSearch.rows.length === 0) {
+        throw new Error("Issue Not Found!")
+    }
+    await pool.query(
+        `DELETE FROM issues WHERE id=$1`, [id]
+    )
+}
+
 export  const serviceIssues ={
     createServiceIssue,
     createServiceIssueSingle,
-    createServicePatch
+    createServicePatch,
+    createServiceDelete
 }
