@@ -12,6 +12,18 @@ const createServiceIssue = async(payload: any ,reporterId:number)=>{
 }
 
 
+const createServiceIssueSingle = async(id:number)=>{
+ 
+    const result = await pool.query(`
+        SELECT * FROM issues WHERE id=$1
+        
+        `,[id])
+      
+        return result
+
+}
+
 export  const serviceIssues ={
-    createServiceIssue
+    createServiceIssue,
+    createServiceIssueSingle
 }

@@ -52,3 +52,29 @@ Method -> POST - URL -> /api/issues - TIME-> 1779537572075
 Method -> POST - URL -> /api/issues - TIME-> 1779537628290 
 
 Method -> POST - URL -> /api/issues - TIME-> 1779537868514 
+
+Method -> GET - URL -> /api/issues/2 - TIME-> 1779539783113 
+
+Method -> GET - URL -> /api/issues/2 - TIME-> 1779540107859 
+
+Method -> GET - URL -> /api/issues/2 - TIME-> 1779540198423 
+
+Method -> GET - URL -> /api/issues/2 - TIME-> 1779540250173 
+
+Method -> GET - URL -> /api/issues/2 - TIME-> 1779540325803 
+
+Method -> GET - URL -> /api/issues/2 - TIME-> 1779540362616 
+
+Method -> GET - URL -> /api/issues/2 - TIME-> 1779540403173 
+
+Method -> GET - URL -> /api/issues/2 - TIME-> 1779540472272 
+
+Method -> GET - URL -> /api/issues/45 - TIME-> 1779540568644 
+
+Method -> POST - URL -> /api/issues - TIME-> 1779540632060 
+
+Method -> GET - URL -> /api/issues/3 - TIME-> 1779540653807 
+
+Method -> GET - URL -> /api/issues/3 - TIME-> 1779540717368 
+
+Method -> GET - URL -> /api/issues/3 - TIME-> 1779540829712 
