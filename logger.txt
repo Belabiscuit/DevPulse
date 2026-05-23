@@ -30,3 +30,25 @@ Method -> POST - URL -> /api/auth/login - TIME-> 1779528749449
 Method -> POST - URL -> /api/auth/login - TIME-> 1779528847694 
 
 Method -> POST - URL -> /api/auth/login - TIME-> 1779528939023 
+
+Method -> POST - URL -> /api/issues - TIME-> 1779536498270 
+
+Method -> POST - URL -> /api/issues - TIME-> 1779536537783 
+
+Method -> POST - URL -> /api/issues - TIME-> 1779536557173 
+
+Method -> POST - URL -> /api/issues - TIME-> 1779536775400 
+
+Method -> POST - URL -> /api/issues - TIME-> 1779536901039 
+
+Method -> POST - URL -> /api/auth/login - TIME-> 1779537045665 
+
+Method -> POST - URL -> /api/issues - TIME-> 1779537101076 
+
+Method -> POST - URL -> /api/issues - TIME-> 1779537273978 
+
+Method -> POST - URL -> /api/issues - TIME-> 1779537572075 
+
+Method -> POST - URL -> /api/issues - TIME-> 1779537628290 
+
+Method -> POST - URL -> /api/issues - TIME-> 1779537868514 

@@ -2,6 +2,7 @@ import express, { json, request, type Application, type Request, type Response }
 import fs from "fs"
 import { userRouter } from "./Modules/user/user.route";
 import { authRouter } from "./Modules/Auth/auth.route";
+import { issuesRouter } from "./Modules/Issues/issues.route";
 const app:Application = express()
 
 
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 
 app.use("/api/auth",userRouter)
 app.use("/api/auth/login",authRouter)
+app.use("/api/issues",issuesRouter)
 
 
 
