@@ -29,6 +29,29 @@ const createIssues = async (req:Request ,res:Response) =>{
         }
     }
 
+    const createAllIssuesController = async (req: Request, res: Response) => {
+  try {
+    const { sort, type, status } = req.query;
+
+    const result = await serviceIssues.createAllIssues(
+      sort as string | undefined,
+      type as string | undefined,
+      status as string | undefined
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Issues retrieved successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    return res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 
     const createIssueControllersSingle = async(req:Request,res:Response)=>{
         const {id} = req.params
@@ -102,6 +125,7 @@ const createIssues = async (req:Request ,res:Response) =>{
 export const issuesController={
     createIssues,
     createIssueControllersSingle,
+    createAllIssuesController,
     patchIssueController,
     deleteIssueController
 

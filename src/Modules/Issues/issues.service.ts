@@ -22,6 +22,69 @@ const createServiceIssueSingle = async(id:number)=>{
         return result
 
 }
+const createAllIssues = async (
+  sort: string | undefined,
+  type: string | undefined,
+  status: string | undefined
+) => {
+  const order = sort === "oldest" ? "ASC" : "DESC";
+
+  const conditions: string[] = [];
+  const values: any[] = [];
+  let index = 1;
+
+  if (type) {
+    conditions.push(`type = $${index++}`);
+    values.push(type);
+  }
+  if (status) {
+    conditions.push(`status = $${index++}`);
+    values.push(status);
+  }
+
+  const whereClause =
+    conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
+
+ 
+  const issuesResult = await pool.query(
+    `SELECT * FROM issues ${whereClause} ORDER BY created_at ${order}`,
+    values
+  );
+
+  const issues = issuesResult.rows;
+
+  if (issues.length === 0) {
+    throw new Error("No issues found");
+  }
+
+  
+  const allReporterIds = issues.map((issue) => issue.reporter_id);
+
+  const usersResult = await pool.query(
+    `SELECT id, name, role FROM users WHERE id = ANY($1)`,
+    [allReporterIds]
+  );
+
+
+  const usersMap: Record<number, any> = {};
+  usersResult.rows.forEach((user) => {
+    usersMap[user.id] = user;
+  });
+
+ 
+  const data = issues.map((issue) => ({
+    id: issue.id,
+    title: issue.title,
+    description: issue.description,
+    type: issue.type,
+    status: issue.status,
+    reporter: usersMap[issue.reporter_id] || null,
+    created_at: issue.created_at,
+    updated_at: issue.updated_at,
+  }));
+
+  return data;
+};
 
 
 
@@ -75,6 +138,7 @@ const createServiceDelete = async (id: number) => {
 export  const serviceIssues ={
     createServiceIssue,
     createServiceIssueSingle,
+    createAllIssues,
     createServicePatch,
     createServiceDelete
 }
