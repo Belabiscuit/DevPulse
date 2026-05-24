@@ -22,7 +22,7 @@ const createServiceIssueSingle = async(id:number)=>{
         return result
 
 }
-const createAllIssues = async (
+const createServiceIssueGetAll = async (
   sort: string | undefined,
   type: string | undefined,
   status: string | undefined
@@ -138,7 +138,7 @@ const createServiceDelete = async (id: number) => {
 export  const serviceIssues ={
     createServiceIssue,
     createServiceIssueSingle,
-    createAllIssues,
+    createServiceIssueGetAll,
     createServicePatch,
     createServiceDelete
 }

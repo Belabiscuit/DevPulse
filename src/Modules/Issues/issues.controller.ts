@@ -29,11 +29,11 @@ const createIssues = async (req:Request ,res:Response) =>{
         }
     }
 
-    const createAllIssuesController = async (req: Request, res: Response) => {
+    const createIssueControllerAll = async (req: Request, res: Response) => {
   try {
     const { sort, type, status } = req.query;
 
-    const result = await serviceIssues.createAllIssues(
+    const result = await serviceIssues.createServiceIssueGetAll(
       sort as string | undefined,
       type as string | undefined,
       status as string | undefined
@@ -125,7 +125,7 @@ const createIssues = async (req:Request ,res:Response) =>{
 export const issuesController={
     createIssues,
     createIssueControllersSingle,
-    createAllIssuesController,
+    createIssueControllerAll,
     patchIssueController,
     deleteIssueController
 

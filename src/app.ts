@@ -6,30 +6,13 @@ import { issuesRouter } from "./Modules/Issues/issues.route";
 const app:Application = express()
 
 
-
-
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({extended:true}))
 
-
-
-
-
 app.use("/api/auth",userRouter)
 app.use("/api/auth/login",authRouter)
 app.use("/api/issues",issuesRouter)
-
-
-
-
-
-
-
-
-
-
-
 
 
 app.get('/', (req:Request, res:Response) => {
