@@ -90,7 +90,7 @@ const createServiceIssueGetAll = async (
 
 const createServicePatch = async(id:number,userID:number,role:string,payload:any,)=>{
     const {title,description,type} = payload
-//id patate hbe 
+
        const issueSearch = await pool.query(`
             SELECT *FROM issues WHERE id=$1
         

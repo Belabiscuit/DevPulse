@@ -21,7 +21,7 @@ const createIssues = async (req:Request ,res:Response) =>{
 
 
         } catch (error:any) {
-          res.status(400).json({
+          res.status(500).json({
             success: false,
             message: error.message,
             error: {}
@@ -93,7 +93,7 @@ const createIssues = async (req:Request ,res:Response) =>{
             data: result.rows[0]
         })
         } catch (error:any) {
-             return res.status(400).json({
+             return res.status(500).json({
             success: false,
             message: error.message,
             
@@ -112,7 +112,7 @@ const createIssues = async (req:Request ,res:Response) =>{
             message: "Issue deleted successfully"
         })
     } catch (error: any) {
-        res.status(400).json({
+        res.status(500).json({
             success: false,
             message: error.message,
             error: {}
