@@ -1,27 +1,32 @@
 import type { Request, Response } from "express";
 import { authServices } from "./auth.service";
+import sendResponse from "../../Utility/sendResponse";
 
 const loginUser= async(req:Request,res:Response)=>{
     try {
         const result = await authServices.loginServices(req.body)
 
-         res.status(200).json({
+
+         sendResponse(res,{
+        statusCode:200,
         success:true,
-        message:"Login successful",
-        data:{
+        message:"user registered Successfully",
+         data:{
             token:result.token,
             user:result.user
         }
-    })
-    } catch (error:any) {
-        res.status(400).json({
-            success: false,
-            message: error.message,
-            error: {}
-        })
-        
-    }
 
+
+       })
+    }
+     catch (error:any) {
+        sendResponse(res,{
+        statusCode:500,
+        success:false,
+        message:error.message,
+        error:error,
+      })
+}
 }
 export const authController ={
     loginUser

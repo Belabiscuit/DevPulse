@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { serviceIssues } from "./issues.service";
 import { pool } from "../../db";
+import sendResponse from "../../Utility/sendResponse";
 
 const createIssues = async (req:Request ,res:Response) =>{
         const user = (req as any).user
@@ -11,22 +12,26 @@ const createIssues = async (req:Request ,res:Response) =>{
             
 
             const result = await serviceIssues.createServiceIssue(req.body,reporterId)
-            res.status(201).json({
-             success:true,
-             message : "Issue created successfully",
-             data:result
-            })
+            sendResponse(res,{
+        statusCode:201,
+        success:true,
+        message:"Issue created successfully",
+        data:result
+
+       })
 
 
 
 
         } catch (error:any) {
-          res.status(500).json({
-            success: false,
-            message: error.message,
-            error: {}
-        }) 
-        }
+        sendResponse(res,{
+        statusCode:500,
+        success:false,
+        message:error.message,
+        error:error,
+      })
+}
+
     }
 
     const createIssueControllerAll = async (req: Request, res: Response) => {
@@ -39,17 +44,30 @@ const createIssues = async (req:Request ,res:Response) =>{
       status as string | undefined
     );
 
-    return res.status(200).json({
-      success: true,
-      message: "Issues retrieved successfully",
-      data: result,
-    });
-  } catch (error: any) {
-    return res.status(404).json({
-      success: false,
-      message: error.message,
-    });
-  }
+
+
+     sendResponse(res,{
+        statusCode:201,
+        success:true,
+        message:"Issues retrieved successfully",
+        data:result
+
+       })
+
+    // return res.status(200).json({
+    //   success: true,
+    //   message: "Issues retrieved successfully",
+    //   data: result,
+    // });
+  } catch (error:any) {
+        sendResponse(res,{
+        statusCode:404,
+        success:false,
+        message:error.message,
+        error:error,
+      })
+}
+
 };
 
 
@@ -64,19 +82,22 @@ const createIssues = async (req:Request ,res:Response) =>{
 
             })
         }
-          res.status(200).json({
-            success:true,
-            message:"Issue retrieved successfully",
-            data:result.rows[0],
-        })     
-        } catch (error:any) {
-            res.status(404).json({
-            success:false,
-            message:error.message,
-            error:error,
+            sendResponse(res,{
+        statusCode:201,
+        success:true,
+        message:"Issues retrieved successfully",
+        data:result.rows[0]
 
-        })
-        }
+       })    
+        } catch (error:any) {
+        sendResponse(res,{
+        statusCode:404,
+        success:false,
+        message:error.message,
+        error:error,
+      })
+}
+
 
     } 
 
@@ -87,18 +108,21 @@ const createIssues = async (req:Request ,res:Response) =>{
             const {id} =req.params
             const{role,id:userID}=(req as any).user
           const result = await serviceIssues.createServicePatch(Number(id), userID, role, req.body)
-            res.status(200).json({
-            success: true,
-            message: "Issue updated successfully",
-            data: result.rows[0]
-        })
+           sendResponse(res,{
+        statusCode:201,
+        success:true,
+        message:"Issues updated successfully",
+        data:result.rows[0]
+
+       })
         } catch (error:any) {
-             return res.status(500).json({
-            success: false,
-            message: error.message,
-            
-        })
-        }
+        sendResponse(res,{
+        statusCode:500,
+        success:false,
+        message:error.message,
+        error:error,
+      })
+}
 
     }
 
@@ -107,17 +131,21 @@ const createIssues = async (req:Request ,res:Response) =>{
 
     try {
         await serviceIssues.createServiceDelete(Number(id))
-        res.status(200).json({
-            success: true,
-            message: "Issue deleted successfully"
-        })
-    } catch (error: any) {
-        res.status(500).json({
-            success: false,
-            message: error.message,
-            error: {}
-        })
-    }
+      sendResponse(res,{
+        statusCode:200,
+        success:true,
+        message:"Issues deleted successfully",
+        
+
+       })
+    } catch (error:any) {
+        sendResponse(res,{
+        statusCode:500,
+        success:false,
+        message:error.message,
+        error:error,
+      })
+}
 }
 
 
